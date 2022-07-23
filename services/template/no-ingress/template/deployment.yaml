@@ -50,3 +50,14 @@ spec:
             memory: {{.Values.memory}}
         ports:
         - containerPort: {{.Values.servicePort}}
+        {{- if or .Values.env.config .Values.env.secrets}}
+        envFrom:
+        {{- if .Values.env.config}}
+        - configMapRef:
+            name: {{.Values.name}}
+        {{- end}}
+        {{- if .Values.env.secrets}}
+        - secretRef:
+            name: {{.Values.name}}
+        {{- end}}
+        {{- end}}
