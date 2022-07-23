@@ -31,4 +31,4 @@ env:
   config:
     key1: value1
   secrets:
-    MONGO_AUTH: <+pipeline.variable.DB_PASS>
+    MONGO_AUTH: <+secrets.getValue("DB_PASS_PROD")>
